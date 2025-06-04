@@ -45,7 +45,7 @@ jobs:
       uses: SonarSource/sonarqube-scan-action@v5.0.0
       with:
         args: >
-          -Dsonar.projectKey=myapp
+          -Dsonar.projectKey=ruebee08_ppp
           -Dsonar.organization=ruebee08
           -Dsonar.sources=.
           -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
