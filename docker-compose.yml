@@ -24,8 +24,8 @@ services:
     command: >
       zap-baseline.py
       -t http://frontend:80
-      -r zap-report.html
-      zap.sh -cmd -autorun /zap/wrk/zap.yaml
+      -J
+      
     
 
 volumes:

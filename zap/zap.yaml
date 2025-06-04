@@ -23,5 +23,5 @@ jobs:
     description: "Generate HTML report"
     parameters:
       template: traditional-html
-      reportDir: /zap/wrk
+      reportDir: /zap
       reportFile: zap-report.html
