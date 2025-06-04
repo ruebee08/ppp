@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dummy App</title></head>
+<body>
+  <h1>Frontend</h1>
+  <script>
+    fetch('http://localhost:5000/api/data')
+      .then(response => response.json())
+      .then(data => document.body.innerHTML += `<p>${data.message}</p>`);
+  </script>
+</body>
+</html>
