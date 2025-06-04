@@ -23,7 +23,7 @@ services:
       -t http://frontend:80
       -r zap-report.html
     volumes:
-      - zap_data:/zap/wrk
+      - zap_data:/zap/wrk:rw
 
 volumes:
   zap_data:
