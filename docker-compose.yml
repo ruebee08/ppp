@@ -23,8 +23,3 @@ services:
       -t http://frontend:80
       -s
 
-volumes:
-  zap_data:
-    # This volume is used to persist ZAP data across runs
-    # It can be useful for debugging or for running multiple scans
-    # without losing previous results.
