@@ -33,7 +33,6 @@ jobs:
           name: zap-report
           path: zap-report.html
 
-      - name: Shutdown docker-compose
-        run: docker compose down
+      
 
 
