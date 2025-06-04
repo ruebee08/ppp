@@ -19,9 +19,4 @@ jobs:
     description: "Run active scan on target URLs"
     context: "Default Context"
 
-  - type: report
-    description: "Generate HTML report"
-    parameters:
-      template: traditional-html
-      reportDir: /zap
-      reportFile: zap-report.html
+ 
