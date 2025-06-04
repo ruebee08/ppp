@@ -70,6 +70,4 @@ jobs:
         exit-code: 0
         ignore-unfixed: true
 
-    # Optional: Run backend tests
-    # - name: Run backend tests
-    #   run: docker exec <backend-container-name> npm test
+   
