@@ -22,4 +22,5 @@ services:
       zap-baseline.py
       -t http://frontend:80
       -s
+      -I
 
