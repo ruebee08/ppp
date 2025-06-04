@@ -12,3 +12,15 @@ services:
       - "8080:80"
     depends_on:
       - backend
+  
+
+  zap:
+    image: owasp/zap2docker-stable
+    depends_on:
+      - frontend
+    command: >
+      zap-baseline.py
+      -t http://frontend:80
+      -r zap-report.html
+    volumes:
+      - ./zap:/zap/wrk
