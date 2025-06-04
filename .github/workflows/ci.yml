@@ -45,9 +45,12 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@master
       with:
         args: >
-          -Dsonar.projectKey=myapp
-          -Dsonar.sources=.
-          -Dsonar.host.url=${{ env.SONAR_HOST_URL }}
+          -Dsonar.projectKey=myapp \
+          -Dsonar.organization=ruebee08 \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
