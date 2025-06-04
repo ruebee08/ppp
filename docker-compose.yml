@@ -24,7 +24,7 @@ services:
     command: >
       zap-baseline.py
       -t http://frontend:80
-      -J
+      -J /zap/report.json -s
       
     
 
