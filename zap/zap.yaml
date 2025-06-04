@@ -1,0 +1,27 @@
+---
+version: 1.0
+options:
+  # Optional: global scan settings
+  maxDuration: 5m
+
+environments:
+  - name: default
+    contexts:
+      - name: Default Context
+        urls:
+          - "http://frontend:80"
+
+jobs:
+  - type: passive-scan
+    description: "Run passive scan to check for issues"
+
+  - type: active-scan
+    description: "Run active scan on target URLs"
+    context: "Default Context"
+
+  - type: report
+    description: "Generate HTML report"
+    parameters:
+      template: traditional-html
+      reportDir: /zap/wrk
+      reportFile: zap-report.html

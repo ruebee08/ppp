@@ -18,12 +18,15 @@ services:
     image: ghcr.io/zaproxy/zaproxy:stable
     depends_on:
       - frontend
+
+    volumes:
+      - zap_data:/zap/wrk:rw
     command: >
       zap-baseline.py
       -t http://frontend:80
       -r zap-report.html
-    volumes:
-      - zap_data:/zap/wrk:rw
+      zap.sh -cmd -autorun /zap/wrk/zap.yaml
+    
 
 volumes:
   zap_data:
