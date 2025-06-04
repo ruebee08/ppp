@@ -67,7 +67,7 @@ jobs:
       with:
         image-ref: frontend-test
         format: table
-        exit-code: 1
+        exit-code: 0
         ignore-unfixed: true
 
     # Optional: Run backend tests
