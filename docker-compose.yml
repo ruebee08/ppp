@@ -23,4 +23,10 @@ services:
       -t http://frontend:80
       -r zap-report.html
     volumes:
-      - ./zap:/zap/wrk
+      - zap_data:/zap/wrk
+
+volumes:
+  zap_data:
+    # This volume is used to persist ZAP data across runs
+    # It can be useful for debugging or for running multiple scans
+    # without losing previous results.
