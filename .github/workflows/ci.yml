@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -22,12 +26,11 @@ jobs:
     - name: Build backend
       run: docker build -t backend-test ./backend
 
-    - name: Lint Dockerfiles (optional)
+    - name: Lint Dockerfiles
       uses: hadolint/hadolint-action@v2.0.0
       with:
         dockerfile: ./frontend/Dockerfile
 
-    # Optional: Run docker-compose
     - name: Spin up services (docker-compose)
       run: docker compose up -d --build
 
@@ -37,6 +40,34 @@ jobs:
     - name: Check containers running
       run: docker ps -a
 
-    # Optional: Run Tests if available
+    # --- SONARQUBE SCAN ---
+    - name: SonarQube Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        args: >
+          -Dsonar.projectKey=myapp
+          -Dsonar.sources=.
+          -Dsonar.host.url=${{ env.SONAR_HOST_URL }}
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    # --- TRIVY SCAN ---
+    - name: Scan backend image with Trivy
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: backend-test
+        format: table
+        exit-code: 0
+        ignore-unfixed: true
+
+    - name: Scan frontend image with Trivy
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: frontend-test
+        format: table
+        exit-code: 1
+        ignore-unfixed: true
+
+    # Optional: Run backend tests
     # - name: Run backend tests
     #   run: docker exec <backend-container-name> npm test
