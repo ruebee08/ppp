@@ -15,7 +15,7 @@ services:
   
 
   zap:
-    image: owasp/zap2docker-stable
+    image: ghcr.io/zaproxy/zaproxy:stable
     depends_on:
       - frontend
     command: >
