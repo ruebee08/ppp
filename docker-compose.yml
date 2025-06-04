@@ -23,4 +23,4 @@ services:
       -t http://frontend:80
       -r zap-report.html
     volumes:
-      - ./zap:/zap/wrk
+      - ./zap:/zap
