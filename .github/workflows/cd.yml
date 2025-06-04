@@ -1,0 +1,39 @@
+name: CD Pipeline 
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]  # Name of the CI workflow
+    types:
+      - completed
+
+jobs:
+  build-and-zap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Compose
+        run: |
+          docker-compose up -d --build
+          sleep 15  # Give services time to become ready
+
+      - name: Run OWASP ZAP Baseline Scan
+        run: |
+          docker run --network="host" \
+            -v ${{ github.workspace }}:/zap/wrk \
+            owasp/zap2docker-stable zap-baseline.py \
+            -t http://localhost:8080 \
+            -r zap-report.html || echo "ZAP scan completed with issues"
+
+      - name: Upload ZAP HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report
+          path: zap-report.html
+
+      - name: Shutdown docker-compose
+        run: docker-compose down
+
+
