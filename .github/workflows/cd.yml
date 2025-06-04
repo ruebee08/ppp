@@ -16,7 +16,7 @@ jobs:
 
       - name: Set up Docker Compose
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
           sleep 15  # Give services time to become ready
 
       - name: Run OWASP ZAP Baseline Scan
